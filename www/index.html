@@ -1,0 +1,217 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+  <head>
+	<!-- Change this if you want to allow scaling -->
+    <meta name="viewport" content="width=default-width; user-scalable=no" />
+
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+
+    <title>TableView</title>
+	
+	<!-- iPad/iPhone specific css below, add after your main css >
+	<link rel="stylesheet" media="only screen and (max-device-width: 1024px)" href="ipad.css" type="text/css" />		
+	<link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="iphone.css" type="text/css" />		
+	-->
+	<script type="text/javascript" charset="utf-8" src="phonegap.js"></script>
+	<script type="text/javascript" charset="utf-8" src="NativeTableView.js"></script>
+	
+	<style>
+	
+	body
+	{
+		background-color:#666;
+	}
+	
+	#clock
+	{
+		margin-bottom:20px;
+	}
+	
+	#tblView
+	{
+		background-color:#444;
+		margin:0px 0px;
+		min-height:300px;
+		min-width:200px;
+	}
+	
+	#scrollView
+	{
+		background-color:#444;
+		margin:0px 0px;
+		min-height:300px;
+		min-width:200px;
+	}
+	
+	</style>
+	
+    <script type="text/javascript" charset="utf-8">
+	
+	var feedUrl = "http://phobos.apple.com/WebObjects/MZStoreServices.woa/ws/RSS/toppaidapplications/limit=250/json";
+
+
+	// If you want to prevent dragging, uncomment this section
+	
+	function preventBehavior(e) 
+	{ 
+      //e.preventDefault(); 
+    };
+
+	var itemData = [];
+	var globalCallCount = 0;
+	
+	function onBodyLoad()
+	{
+		document.addEventListener("deviceready",onDeviceReady,false);
+		document.addEventListener("touchmove", preventBehavior, false);
+
+		
+		
+	}
+	
+	function showScrollView()
+	{
+		var elem = document.getElementById("scrollView");
+		
+		var x = elem.offsetLeft;
+		var y = elem.offsetTop;
+		var w = elem.offsetWidth;
+		var h = elem.offsetHeight;
+		
+		PhoneGap.exec("ScrollViewCommand.showView",x,y,w,h);
+		
+	}
+	
+	function loadFeed()
+	{
+		var xhr = new XMLHttpRequest();
+		
+		xhr.open("GET",feedUrl,true);
+		
+		var self = this;
+	
+		xhr.onerror = function(){self.onError(this);};
+		xhr.onreadystatechange = function(){self.readyStateChange(this);};
+		
+		xhr.send("");
+	}
+	
+	function onError(req)
+	{
+		alert("error : " + req.responseText);
+	}
+	
+	function readyStateChange(req)
+	{
+		if (req.readyState == 4)	
+		{
+			if(req.status == 404)
+			{
+				alert("404");
+			}
+			else
+			{
+				var cleaned = req.responseText.split("im:").join("");
+				
+				var result = JSON.parse(cleaned);
+				itemData = result.feed.entry;
+
+				setTimeout(makeTable,1000);
+			}
+		}
+	}
+	
+	function updateClock()
+	{
+		document.getElementById('clock').innerHTML = new Date();
+	}
+	
+	function makeTable()
+	{
+		var elem = document.getElementById("tblView");
+		
+		var x = elem.offsetLeft;
+		var y = elem.offsetTop;
+		var w = elem.offsetWidth;
+		var h = elem.offsetHeight;
+		
+		PhoneGap.exec("TableViewCommand.showView",x,y,w,h);
+	}
+	
+	/* When this function is called, PhoneGap has been initialized and is ready to roll */
+	function onDeviceReady()
+	{
+		// do your thing!
+		
+		showScrollView();
+		setInterval(updateClock,1000);
+		
+		loadFeed();
+
+	}
+	
+	function getItemCount()
+	{
+		document.getElementById("result").innerHTML = itemData.length;
+		//document.getElementById("result").innerHTML = itemData[0];
+		
+		return itemData.length;
+		
+	}
+	
+	function now()
+	{
+		return new Date().getTime();
+	}
+	
+	var lastCall = now();
+	
+	function getItemAtIndex(n)
+	{
+		globalCallCount++;
+		
+		//var timeDiff = now() - lastCall;
+		
+		//lastCall += timeDiff;
+		
+
+		return JSON.stringify({"text":itemData[n].name.label,
+							   "detailText":itemData[n].rights.label,
+							   "image":itemData[n].image[0].label
+							   });/* "timeDiff":timeDiff*/
+	}
+	
+	function selectedItemAtIndex(n)
+	{
+		document.getElementById('result').innerHTML = "You selected " + n;
+	}
+    
+    </script>
+  </head>
+  <body onload="onBodyLoad()">
+		<h2>Plain old html</h2>
+		<div id='result'>&nbsp;</div>
+		<div id="tblView"></div>
+		<div>
+		<p>
+		Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec consectetur nunc ultricies tortor elementum tincidunt. Nullam eget elit at velit suscipit lobortis sagittis ut diam. Ut pharetra massa id tellus adipiscing feugiat. Quisque quam urna, dapibus at feugiat non, rhoncus et sem. Nulla ullamcorper rhoncus ligula et porta. In pretium accumsan mauris at volutpat. Vestibulum feugiat convallis ante, quis blandit leo dictum ut. In quis sem diam. Ut dapibus tortor at est tempor pellentesque. Pellentesque quam turpis, accumsan nec ultrices ac, suscipit sit amet nibh.
+
+Aenean pulvinar vulputate enim, non consectetur est rhoncus nec. Maecenas at pellentesque erat. Duis adipiscing rhoncus cursus. Nam commodo hendrerit tortor nec cursus. Maecenas vehicula egestas ante vel gravida. Suspendisse malesuada nulla ut arcu lobortis non commodo libero imperdiet. Integer tincidunt ultrices metus, id elementum arcu elementum at. Proin aliquet justo vel felis pellentesque id fringilla sem laoreet. Morbi vel massa vitae dui scelerisque hendrerit. Nulla ut orci lacus, at tincidunt purus. Mauris rutrum, quam ac aliquet elementum, tortor lacus porta elit, ornare eleifend mauris augue sed leo. Vivamus mollis bibendum massa, quis ornare lectus convallis vel. Nulla auctor elit vel purus aliquet congue. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. In lacus elit, iaculis vitae suscipit eget, pharetra eget nulla.
+
+Cras laoreet pulvinar libero, sed pellentesque velit malesuada ut.</p>
+
+	<div id="scrollView"></div>
+	
+	<p>Maecenas eleifend dictum nunc quis porta. Vestibulum interdum urna sit amet nibh laoreet id ornare urna rhoncus. In dignissim gravida semper. Praesent lorem est, adipiscing aliquet condimentum et, pellentesque tempus orci. Phasellus hendrerit sem nec massa aliquam in euismod enim rutrum. Suspendisse nec mi tristique nisl mollis laoreet. Sed posuere quam non diam sollicitudin eget pulvinar ipsum suscipit. Sed vel diam non purus imperdiet semper. Phasellus neque arcu, tempus sed molestie non, rutrum eu dolor. Duis erat elit, rhoncus vel mattis eu, volutpat ac arcu. Morbi eu leo in leo volutpat molestie dignissim eget leo. Etiam eu eros lectus, nec molestie lorem. Etiam a metus nisl. Fusce enim elit, tristique at lobortis non, dapibus sed nisl. Cras et libero a magna lacinia euismod nec a lectus. Cras quis massa a enim pulvinar convallis. Donec suscipit rhoncus dolor in lobortis. In nulla lacus, fringilla id tristique ac, mollis in lacus. Nullam blandit interdum eros eu vulputate.
+
+Duis faucibus leo ac nulla varius a elementum nisi pulvinar. Duis tortor metus, pretium quis dapibus ut, elementum tincidunt lectus. Nullam gravida vestibulum ultricies. Proin mattis massa et urna interdum suscipit. Nam tempor pretium sem, quis semper purus euismod nec. Suspendisse consequat turpis ac lectus vulputate scelerisque. Sed feugiat commodo porttitor. Suspendisse purus odio, sodales quis malesuada placerat, viverra ac quam. Cras vehicula turpis eget nunc egestas at mollis enim accumsan. Donec ut eleifend quam.
+
+Suspendisse potenti. Proin vestibulum molestie tempor. Pellentesque malesuada porttitor velit, ut venenatis turpis ultrices non. Suspendisse ac dapibus elit. Nullam at ipsum elit. Aenean faucibus dictum diam, non suscipit est porttitor non. Cras vulputate nisl sed odio convallis aliquet. Integer id urna nec diam porta lacinia sed nec quam. Cras et mollis velit. Morbi rutrum purus nec lorem interdum molestie. Quisque bibendum augue lorem, quis aliquet tortor. In malesuada eros blandit ligula vehicula ac convallis purus consectetur. Nunc id libero neque. Integer accumsan nisi vitae lacus adipiscing vitae commodo sem congue. Morbi consequat dolor ut augue placerat varius. Praesent eu orci sit amet lectus feugiat tempor.
+		</p>
+		</div>
+		<div id='clock'></div>
+		
+		
+  </body>
+</html>
