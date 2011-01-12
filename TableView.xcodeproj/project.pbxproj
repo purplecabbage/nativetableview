@@ -29,7 +29,6 @@
 		305D5FD1115AB8F900A74A75 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 305D5FD0115AB8F900A74A75 /* MobileCoreServices.framework */; };
 		30E1352710E2C1420031B30D /* PhoneGap.plist in Resources */ = {isa = PBXBuildFile; fileRef = 30E1352610E2C1420031B30D /* PhoneGap.plist */; };
 		88346CB3127D526400C4BDFE /* TableViewCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 88346CB2127D526400C4BDFE /* TableViewCommand.m */; };
-		88346CD0127D54F600C4BDFE /* NativeControls.m in Sources */ = {isa = PBXBuildFile; fileRef = 88346CCF127D54F600C4BDFE /* NativeControls.m */; };
 		88346F88127E5F5800C4BDFE /* ImageViewCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 88346F87127E5F5800C4BDFE /* ImageViewCommand.m */; };
 		8865CC801286B9F400CC6C66 /* ScrollViewCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 8865CC7F1286B9F400CC6C66 /* ScrollViewCommand.m */; };
 		8865CC9E1286BC9A00CC6C66 /* glovebox-ops.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8865CC9D1286BC9A00CC6C66 /* glovebox-ops.jpg */; };
@@ -82,10 +81,8 @@
 		32CA4F630368D1EE00C91783 /* TableView_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableView_Prefix.pch; sourceTree = "<group>"; };
 		88346CB1127D526400C4BDFE /* TableViewCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewCommand.h; sourceTree = "<group>"; };
 		88346CB2127D526400C4BDFE /* TableViewCommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewCommand.m; sourceTree = "<group>"; };
-		88346CCF127D54F600C4BDFE /* NativeControls.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NativeControls.m; path = /CodeRepos/GitHub/gitPhoneGapPlugins/iPhone/NativeControls/NativeControls.m; sourceTree = "<absolute>"; };
 		88346F86127E5F5800C4BDFE /* ImageViewCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageViewCommand.h; sourceTree = "<group>"; };
 		88346F87127E5F5800C4BDFE /* ImageViewCommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageViewCommand.m; sourceTree = "<group>"; };
-		88346FD0127EABF200C4BDFE /* NativeControls.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NativeControls.h; sourceTree = "<group>"; };
 		8865CC7E1286B9F400CC6C66 /* ScrollViewCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScrollViewCommand.h; sourceTree = "<group>"; };
 		8865CC7F1286B9F400CC6C66 /* ScrollViewCommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScrollViewCommand.m; sourceTree = "<group>"; };
 		8865CC9D1286BC9A00CC6C66 /* glovebox-ops.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "glovebox-ops.jpg"; sourceTree = "<group>"; };
@@ -214,10 +211,8 @@
 				88F7F27E12866A4100C4C5FB /* AppRecord.m */,
 				88F7F24D1286652600C4C5FB /* IconDownloader.h */,
 				88F7F24E1286652600C4C5FB /* IconDownloader.m */,
-				88346FD0127EABF200C4BDFE /* NativeControls.h */,
 				88346F86127E5F5800C4BDFE /* ImageViewCommand.h */,
 				88346F87127E5F5800C4BDFE /* ImageViewCommand.m */,
-				88346CCF127D54F600C4BDFE /* NativeControls.m */,
 				88346CB1127D526400C4BDFE /* TableViewCommand.h */,
 				88346CB2127D526400C4BDFE /* TableViewCommand.m */,
 			);
@@ -343,7 +338,6 @@
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
 				1D3623260D0F684500981E51 /* TableViewAppDelegate.m in Sources */,
 				88346CB3127D526400C4BDFE /* TableViewCommand.m in Sources */,
-				88346CD0127D54F600C4BDFE /* NativeControls.m in Sources */,
 				88346F88127E5F5800C4BDFE /* ImageViewCommand.m in Sources */,
 				88F7F24F1286652600C4C5FB /* IconDownloader.m in Sources */,
 				88F7F27F12866A4100C4C5FB /* AppRecord.m in Sources */,
