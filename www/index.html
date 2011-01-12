@@ -160,6 +160,11 @@
 		
 	}
 	
+	function killIt()
+	{
+		PhoneGap.exec("TableViewCommand.removeView");
+	}
+	
 	function now()
 	{
 		return new Date().getTime();
@@ -190,7 +195,7 @@
     </script>
   </head>
   <body onload="onBodyLoad()">
-		<h2>Plain old html</h2>
+		<h2 onclick="killIt()">Plain old html</h2>
 		<div id='result'>&nbsp;</div>
 		<div id="tblView"></div>
 		<div>

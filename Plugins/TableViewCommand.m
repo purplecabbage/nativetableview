@@ -43,6 +43,18 @@
 
 }
 
+- (void)removeView:(NSArray*)arguments withDict:(NSDictionary*)options
+{
+	tblView.delegate = nil;
+	tblView.dataSource = nil;
+	[ tblView removeFromSuperview];
+	
+	[tblView release];
+	tblView = nil;
+}
+
+
+
 - (void)hideView:(NSArray*)arguments withDict:(NSDictionary*)options
 {
 	
